@@ -34,7 +34,7 @@ public class RadioTest {
 
     @Test
     void stationAboveLimitConstructor() {
-        Radio service = new Radio(20);
+        Radio service = new Radio(0,3,20);
 //Станция не задана. Изначально ноль.
         service.setCurrentStation(-1);
         assertEquals(0, service.getCurrentStation());
@@ -60,7 +60,7 @@ public class RadioTest {
 
     @Test
     void stationPrevButtonConstructor() {
-        Radio service = new Radio(25);
+        Radio service = new Radio(0,1,25);
 //Проверим что станция нулевая.
         assertEquals(0, service.getCurrentStation());
 
@@ -87,7 +87,7 @@ public class RadioTest {
 
     @Test
     void stationNextButtonConstructor() {
-        Radio service = new Radio(30);
+        Radio service = new Radio(0,1,30);
 //Проверим что станция нулевая.
         assertEquals(0, service.getCurrentStation());
 
@@ -116,17 +116,12 @@ public class RadioTest {
 
     @Test
     void volumeUpAboveMax() {
-        Radio service = new Radio();
-
-//Проверим что громкость на нуле.
-        assertEquals(0, service.getVolume());
+        Radio service = new Radio(0,99,10);
 
 //Кнопка увеличения громкости при максимуме.
-        int i = 0;
-        while (i < 110) {
-            service.volumeUp();
-            i++;
-        }
+        service.volumeUp();
+        assertEquals(100, service.getVolume());
+        service.volumeUp();
         assertEquals(100, service.getVolume());
     }
 
